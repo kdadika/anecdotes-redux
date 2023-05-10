@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { vote } from "../reducers/anecdoteReducer";
 
 const Anecdote = ({ anecdote, handleClick }) => (
@@ -11,19 +12,18 @@ const Anecdote = ({ anecdote, handleClick }) => (
   </div>
 );
 
-const Anecdotes = (props) => {
-  const handleVote = (anecdote) => {
-    props.vote(anecdote);
-  };
+const Anecdotes = () => {
+  const dispatch = useDispatch();
+  const anecdotes = useSelector((state) => state);
 
   return (
     <div>
       <div>
-        {props.anecdotes.map((anecdote) => (
+        {anecdotes.map((anecdote) => (
           <Anecdote
             key={anecdote.id}
             anecdote={anecdote}
-            handleClick={() => handleVote(anecdote)}
+            handleClick={() => dispatch(vote(anecdote.id))}
           />
         ))}
       </div>
