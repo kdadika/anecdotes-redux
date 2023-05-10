@@ -18,6 +18,7 @@ const Anecdotes = () => {
 
   return (
     <div>
+      <h2>Anecdotes</h2>
       <div>
         {anecdotes.map((anecdote) => (
           <Anecdote
