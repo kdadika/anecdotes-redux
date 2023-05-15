@@ -22,7 +22,7 @@ const initialState = anecdotesAtStart.map(asObject);
 const reducer = (state = initialState, action) => {
   console.log("state now: ", state);
   console.log("action", action);
-  console.log("state after: ", state);
+  console.log(action.payload);
 
   switch (action.type) {
     case "CREATE_ANECDOTE": {
@@ -35,9 +35,9 @@ const reducer = (state = initialState, action) => {
         ...updatedAnecdote,
         votes: updatedAnecdote.votes + 1,
       };
-      return state.map((anecdote) =>
-        anecdote.id !== id ? anecdote : changedAnecdote
-      );
+      return state
+        .map((anecdote) => (anecdote.id !== id ? anecdote : changedAnecdote))
+        .sort((a, b) => (a.votes < b.votes ? 1 : -1));
     }
     default:
       return state;

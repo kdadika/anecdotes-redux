@@ -2,34 +2,36 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { vote } from "../reducers/anecdoteReducer";
 
-const Anecdote = ({ anecdote, handleClick }) => (
-  <div>
-    <div>{anecdote.content}</div>
-    <div>
-      has {anecdote.votes}
-      <button onClick={handleClick}>vote</button>
-    </div>
-  </div>
-);
-
-const Anecdotes = () => {
+const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch();
-  const anecdotes = useSelector((state) => state);
+
+  const voteHandler = () => {
+    dispatch(vote(anecdote.id));
+  };
 
   return (
     <div>
-      <h2>Anecdotes</h2>
+      <div>{anecdote.content}</div>
       <div>
-        {anecdotes.map((anecdote) => (
-          <Anecdote
-            key={anecdote.id}
-            anecdote={anecdote}
-            handleClick={() => dispatch(vote(anecdote.id))}
-          />
-        ))}
+        has {anecdote.votes}
+        <button onClick={voteHandler}>vote</button>
       </div>
     </div>
   );
 };
 
-export default Anecdotes;
+const AnecdoteList = () => {
+  const anecdotes = useSelector((anecdotes) => anecdotes);
+
+  return (
+    <div>
+      <h2>Anecdotes</h2>
+      {anecdotes.map((anecdote) => (
+        <Anecdote key={anecdote.id} anecdote={anecdote} />
+      ))}
+      ;
+    </div>
+  );
+};
+
+export default AnecdoteList;
