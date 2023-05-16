@@ -21,7 +21,13 @@ const Anecdote = ({ anecdote }) => {
 };
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector((anecdotes) => anecdotes);
+  const anecdotes = useSelector(({ filter, anecdotes }) => {
+    if (filter === null) {
+      return anecdotes;
+    }
+    const regex = new RegExp(filter, "i");
+    return anecdotes.filter((anecdote) => anecdote.content.match(regex));
+  });
 
   return (
     <div>
@@ -29,7 +35,6 @@ const AnecdoteList = () => {
       {anecdotes.map((anecdote) => (
         <Anecdote key={anecdote.id} anecdote={anecdote} />
       ))}
-      ;
     </div>
   );
 };
