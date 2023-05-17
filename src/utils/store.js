@@ -1,19 +1,18 @@
-import { combineReducers, applyMiddleware } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
+import logger from "redux-logger";
 
 import anecdoteReducer from "../reducers/anecdoteReducer";
 import filterReducer from "../reducers/filterReducer";
 
-const reducer = combineReducers({
+const reducer = {
   anecdotes: anecdoteReducer,
   filter: filterReducer,
-});
+};
 
-const store = configureStore(
+const store = configureStore({
   reducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  devTools: process.env.NODE_ENV !== "production",
+});
 
 export default store;

@@ -14,7 +14,7 @@ const Filter = () => {
 
   return (
     <div style={style}>
-      filter <input onChange={handleChange} />
+      Search <input onChange={handleChange} />
     </div>
   );
 };

@@ -12,9 +12,9 @@ const App = () => {
   }, [dispatch]);
   return (
     <div>
-      <AnecdoteForm />
-      <Filter />
       <AnecdoteList />
+      <Filter />
+      <AnecdoteForm />
     </div>
   );
 };
