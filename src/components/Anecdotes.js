@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { vote } from "../reducers/anecdoteReducer";
+import { voteFor } from "../reducers/anecdoteReducer";
 
 const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch();
 
   const voteHandler = () => {
-    dispatch(vote(anecdote.id));
+    dispatch(voteFor(anecdote.id));
   };
 
   return (
